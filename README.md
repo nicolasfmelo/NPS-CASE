@@ -89,7 +89,66 @@ O desenho abaixo representa uma camada complementar para controle de consumo, ra
 - **Postgres** para dados transacionais e avaliações estruturadas.
 - **MinIO/S3-compatible** para exportações e artefatos.
 - **Prometheus, Loki e Grafana** para operação local observável.
-- **Arquitetura MASA-inspired** no back-end para separar domain, engines, services, integrations e interfaces.
+- **Arquitetura MASA** no back-end para separar contratos de domínio, regras puras, orquestração, integrações e entrega HTTP.
+
+## Arquitetura MASA no back-end
+
+O back-end foi desenvolvido seguindo a **MASA (Modular Agentic Semantic Architecture)**, uma abordagem de arquitetura semântica e modular pensada para deixar o código fácil de entender, auditar e evoluir por pessoas e agentes de IA. A regra central aplicada aqui é manter cada responsabilidade em uma camada explícita, com dependências apontando para dentro do domínio e sem deixar tipos brutos de infraestrutura vazarem para a lógica de negócio.
+
+Na prática, a organização ficou assim:
+
+- `domain_models/`: contratos atômicos de domínio, exceções e modelos sem dependência de infraestrutura.
+- `engines/`: unidades de regra de negócio puras e preferencialmente stateless, como montagem de prompt, scoring, chunking e detecção de injection.
+- `services/`: orquestração dos fluxos de aplicação, combinando engines e portas de integração.
+- `integrations/`: adaptadores para banco, arquivos locais, object store, vector store, LangGraph e provedores externos de LLM.
+- `delivery/`: camada HTTP fina, com rotas e schemas de entrada/saída.
+- `bootstrap/`: composição explícita da aplicação, settings, container de dependências e observabilidade.
+
+Diagrama simplificado da estrutura de pastas:
+
+```text
+services/back-end/src/app/
+├── bootstrap/                 # composição da aplicação, settings, DI e observabilidade
+├── domain_models/             # contratos e erros de domínio
+│   ├── agent/
+│   ├── chat/
+│   ├── common/
+│   ├── evaluation/
+│   ├── indexing/
+│   ├── metrics/
+│   ├── prompt/
+│   └── rag/
+├── engines/                   # regras puras e unidades de processamento
+│   ├── agent/
+│   ├── chat/
+│   ├── evaluation/
+│   ├── indexing/
+│   ├── metrics/
+│   └── prompt/
+├── services/                  # casos de uso e orquestração
+│   ├── agent/
+│   ├── chat/
+│   ├── evaluation/
+│   ├── indexing/
+│   ├── metrics/
+│   ├── prompt/
+│   └── rag/
+├── integrations/              # fronteiras com infraestrutura e sistemas externos
+│   ├── database/
+│   │   ├── models/            # modelos SQLAlchemy internos à integração
+│   │   └── repos/             # tradução DB ⇄ domínio
+│   ├── external_apis/
+│   ├── langgraph/
+│   ├── llm_providers/
+│   ├── local_files/
+│   ├── object_store/
+│   └── vector_store/
+└── delivery/                  # exposição HTTP e DTOs de transporte
+    ├── http/
+    └── schemas/
+```
+
+Essa divisão ajuda a manter o projeto limpo: endpoints não carregam regra de negócio, services não conhecem detalhes de ORM/MinIO/HTTP externo, engines podem ser testadas isoladamente e os modelos de domínio continuam sendo a linguagem comum entre os módulos.
 
 ## Estrutura do repositório
 
