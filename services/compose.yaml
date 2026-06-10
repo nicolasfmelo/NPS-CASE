@@ -3,7 +3,7 @@ services:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-mais_a_educ}
+      POSTGRES_DB: ${POSTGRES_DB:-instituto_horizonte}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     ports:
@@ -42,7 +42,7 @@ services:
     environment:
       LLM_PROXY_TEST_API_KEY: ${LLM_PROXY_TEST_API_KEY:-dummy-key-for-testing}
       LLM_PROXY_BASE_URL: ${LLM_PROXY_BASE_URL:-https://kviwmiapph.execute-api.us-east-1.amazonaws.com/v1}
-      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-mais_a_educ}
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-instituto_horizonte}
       MINIO_ENDPOINT: http://minio:9000
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-minioadmin}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-minioadmin}

@@ -76,7 +76,7 @@ class CatalogCourse:
     @classmethod
     def from_source(cls, source: CatalogCourseSource) -> "CatalogCourse":
         return cls(
-            id=uuid5(UUID("6ba7b811-9dad-11d1-80b4-00c04fd430c8"), f"mais-a-educ-course:{source.slug}"),
+            id=uuid5(UUID("6ba7b811-9dad-11d1-80b4-00c04fd430c8"), f"instituto-horizonte-course:{source.slug}"),
             slug=source.slug,
             title=source.title,
             level=source.level,

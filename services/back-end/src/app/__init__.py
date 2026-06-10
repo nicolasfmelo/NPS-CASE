@@ -1,1 +1,1 @@
-"""Mais A Educ backend package."""
+"""Instituto Horizonte Digital backend package."""

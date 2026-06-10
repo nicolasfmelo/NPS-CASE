@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mais-a-educ-backend"
+name = "instituto-horizonte-backend"
 version = "0.1.0"
-description = "Mais A Educ MVP."
+description = "Instituto Horizonte Digital MVP."
 requires-python = ">=3.12"
 dependencies = [
   "fastapi>=0.115,<1.0",

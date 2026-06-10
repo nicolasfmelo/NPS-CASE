@@ -1096,7 +1096,7 @@ export function DocsPage() {
               <div>
                 <h1 className="text-xl font-semibold text-[#111b21]">Solution Docs</h1>
                 <p className="text-sm text-[#667781]">
-                  Documento final de solucao tecnica e de produto da plataforma Mais A Educ
+                  Documento final de solucao tecnica e de produto da plataforma Instituto Horizonte Digital
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 # Backend
 
-Backend do MVP **Mais A Educ**, implementado em **Python 3.12 + FastAPI** e organizado com uma estrutura inspirada em **MASA (Modular Agentic Semantic Architecture)**. O objetivo atual do serviço e oferecer uma base cognoscivel para evolucao de:
+Backend do MVP **Instituto Horizonte Digital**, implementado em **Python 3.12 + FastAPI** e organizado com uma estrutura inspirada em **MASA (Modular Agentic Semantic Architecture)**. O objetivo atual do serviço e oferecer uma base cognoscivel para evolucao de:
 
 - chat com suporte a RAG
 - importacao de base de universidades
@@ -164,7 +164,7 @@ O ambiente compartilhado entre front e back fica em `services/compose.yaml`.
 
 Defaults do container:
 
-- `POSTGRES_DB=mais_a_educ`
+- `POSTGRES_DB=instituto_horizonte`
 - `POSTGRES_USER=postgres`
 - `POSTGRES_PASSWORD=postgres`
 - `POSTGRES_PORT=5432`
@@ -172,7 +172,7 @@ Defaults do container:
 A `DATABASE_URL` correspondente para rodar o backend fora do container fica:
 
 ```bash
-export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mais_a_educ"
+export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/instituto_horizonte"
 ```
 
 ### Subir a API
@@ -180,7 +180,7 @@ export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mais_a_educ"
 ```bash
 cd services/back-end
 source .venv/bin/activate
-export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/mais_a_educ"
+export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/instituto_horizonte"
 python run_local.py
 ```
 

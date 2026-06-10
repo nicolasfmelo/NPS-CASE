@@ -27,19 +27,19 @@ def test_from_env_requires_postgres_database_url() -> None:
 
 def test_from_env_accepts_postgres_database_url() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.setenv("MINIO_ACCESS_KEY", "test-key")
         monkeypatch.setenv("MINIO_SECRET_KEY", "test-secret")
 
         settings = AppSettings.from_env()
 
-    assert settings.database_url == "postgresql://postgres:postgres@localhost:5432/mais_a_educ"
+    assert settings.database_url == "postgresql://postgres:postgres@localhost:5432/instituto_horizonte"
     assert settings.datasets_dir == Path(__file__).resolve().parents[4] / "services" / "datasets"
 
 
 def test_from_env_requires_minio_access_key() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.delenv("MINIO_ACCESS_KEY", raising=False)
         monkeypatch.setenv("MINIO_SECRET_KEY", "test-secret")
 
@@ -49,7 +49,7 @@ def test_from_env_requires_minio_access_key() -> None:
 
 def test_from_env_requires_minio_secret_key() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.setenv("MINIO_ACCESS_KEY", "test-key")
         monkeypatch.delenv("MINIO_SECRET_KEY", raising=False)
 
@@ -59,20 +59,20 @@ def test_from_env_requires_minio_secret_key() -> None:
 
 def test_from_env_accepts_legacy_minio_bucket_name() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.setenv("MINIO_ACCESS_KEY", "test-key")
         monkeypatch.setenv("MINIO_SECRET_KEY", "test-secret")
-        monkeypatch.setenv("MINIO_BUCKET_NAME", "mais-a-educ")
+        monkeypatch.setenv("MINIO_BUCKET_NAME", "instituto-horizonte")
         monkeypatch.delenv("MINIO_EXPORT_BUCKET", raising=False)
 
         settings = AppSettings.from_env()
 
-    assert settings.minio_export_bucket == "mais-a-educ"
+    assert settings.minio_export_bucket == "instituto-horizonte"
 
 
 def test_from_env_uses_default_whisper_download_settings() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.setenv("MINIO_ACCESS_KEY", "test-key")
         monkeypatch.setenv("MINIO_SECRET_KEY", "test-secret")
         monkeypatch.delenv("WHISPER_MODEL_DOWNLOAD_URL", raising=False)
@@ -86,7 +86,7 @@ def test_from_env_uses_default_whisper_download_settings() -> None:
 
 def test_from_env_allows_overriding_whisper_download_settings() -> None:
     with pytest.MonkeyPatch.context() as monkeypatch:
-        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/mais_a_educ")
+        monkeypatch.setenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/instituto_horizonte")
         monkeypatch.setenv("MINIO_ACCESS_KEY", "test-key")
         monkeypatch.setenv("MINIO_SECRET_KEY", "test-secret")
         monkeypatch.setenv("WHISPER_MODEL_DOWNLOAD_URL", "https://example.com/model-folder")

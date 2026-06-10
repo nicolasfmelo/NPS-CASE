@@ -34,7 +34,7 @@ def create_application(container: AppContainer | None = None) -> FastAPI:
         output_format=getattr(settings, "log_format", "json"),
     )
     app_container.startup()
-    application = FastAPI(title="Mais A Educ Backend", version="0.1.0")
+    application = FastAPI(title="Instituto Horizonte Digital Backend", version="0.1.0")
     application.state.container = app_container
     application.add_middleware(
         CORSMiddleware,

@@ -31,7 +31,7 @@ def _load_env_file(env_path: Path) -> None:
 
 
 def _build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Sobe o backend Mais A Educ localmente com uvicorn.")
+    parser = argparse.ArgumentParser(description="Sobe o backend Instituto Horizonte Digital localmente com uvicorn.")
     parser.add_argument("--host", default=os.getenv("HOST", "0.0.0.0"))  # nosec B104 - local dev runner
     parser.add_argument("--port", type=int, default=int(os.getenv("PORT", "8000")))
     parser.add_argument(
